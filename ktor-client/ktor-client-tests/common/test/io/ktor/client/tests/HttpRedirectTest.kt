@@ -97,7 +97,7 @@ class HttpRedirectTest : ClientLoader() {
     }
 
     @Test
-    fun testRedirectRelative() = clientTests {
+    fun testRedirectRelative() = clientTests(listOf("CIO")) {
         test { client ->
             client.prepareGet("$TEST_URL_BASE/directory/redirectFile").execute {
                 assertEquals("targetFile", it.bodyAsText())
@@ -106,11 +106,14 @@ class HttpRedirectTest : ClientLoader() {
     }
 
     @Test
-    fun testMultipleRedirectRelative() = clientTests {
+    fun testMultipleRedirectRelative() = clientTests(listOf("CIO")) {
         test { client ->
-            client.prepareGet("$TEST_URL_BASE/multipleRedirects/login").execute {
-                assertEquals("account details", it.bodyAsText())
-            }
+//            repeat(1000) {
+//                println("iter $it")
+                client.prepareGet("$TEST_URL_BASE/multipleRedirects/login").execute {
+                    assertEquals("account details", it.bodyAsText())
+                }
+//            }
         }
     }
 

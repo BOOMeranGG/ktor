@@ -572,8 +572,6 @@ abstract class ContentTestSuite<TEngine : ApplicationEngine, TConfiguration : Ap
                         is PartData.FileItem -> response.append(
                             "file:${part.name},${part.originalFileName},${part.provider().readText()}\n"
                         )
-                        is PartData.BinaryItem -> {
-                        }
                     }
 
                     part.dispose()
@@ -639,8 +637,6 @@ abstract class ContentTestSuite<TEngine : ApplicationEngine, TConfiguration : Ap
                             "file:${part.name},${part.originalFileName}," +
                                 "${part.streamProvider().bufferedReader().lineSequence().count()}\n"
                         )
-                        is PartData.BinaryItem -> {
-                        }
                     }
 
                     part.dispose()

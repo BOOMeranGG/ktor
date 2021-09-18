@@ -26,13 +26,13 @@ class ServerPipelineTest : CoroutineScope {
     @get:Rule
     val testName = TestName()
 
+    @OptIn(InternalCoroutinesApi::class)
     private val dispatcher = ExperimentalCoroutineDispatcher(8)
 
-    private val job: CompletableJob = SupervisorJob()
-    private val name: CoroutineName = CoroutineName("PipelineTest.${testName.methodName}")
+    private val job = SupervisorJob()
 
     override val coroutineContext: CoroutineContext by lazy {
-        (dispatcher as CoroutineContext) + (job as CoroutineContext.Element) + (name as AbstractCoroutineContextElement)
+        CoroutineName("PipelineTest.${testName.methodName}") + job + dispatcher
     }
 
     @get:Rule
